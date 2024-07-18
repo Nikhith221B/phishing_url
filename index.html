@@ -16,6 +16,24 @@
             white-space: pre-wrap;
             word-wrap: break-word;
         }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .notification.show {
+            opacity: 1;
+        }
     </style>
 </head>
 
@@ -25,7 +43,7 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title text-center">Phishing Website(URL) detection</h5>
+                        <h5 class="card-title text-center">Phishing Website (URL) Detection</h5>
                         <form id="urlForm">
                             <div class="form-group">
                                 <label for="urlInput">Paste your URL(s) here (comma-separated for multiple URLs)</label>
@@ -41,11 +59,29 @@
         </div>
     </div>
 
+    <!-- Notification -->
+    <div id="notification" class="notification">The page has reloaded.</div>
+
     <!-- Bootstrap JS and dependencies -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
+        // Function to show notification
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            notification.innerText = message;
+            notification.classList.add('show');
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Show notification on page load
+        window.onload = function() {
+            showNotification('The page has reloaded.');
+        };
+
         document.getElementById('urlForm').addEventListener('submit', async function (event) {
             event.preventDefault();
 
