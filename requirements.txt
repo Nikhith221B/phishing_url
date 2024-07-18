@@ -1,1 +1,14 @@
 fastapi[all]
+selenium
+python-whois
+ipwhois
+pandas
+numpy
+seaborn
+scikit-learn
+plotly
+matplotlib
+networkx
+BeautifulSoup4
+wordcloud
+nltk
